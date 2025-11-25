@@ -53,17 +53,18 @@ RMSE: 0.1529
 MAE : 0.1378
 MAPE: 3.14%
 
-🖼️ 3. Kết quả trực quan (Visualization)
-🔹 Real vs Predicted
+## 📊 3. Kết quả trực quan (Visualization)
+
+### 🔹 Real vs Predicted
 ![real_vs_pred](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/real_vs_pred.png)
 
-🔹 Error Plot
+### 🔹 Error Plot
 ![error_plot](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/error_plot.png)
 
-🔹 Loss Curve
+### 🔹 Loss Curve
 ![loss_curve](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/loss_curve.png)
 
-🔹 Real vs Predicted Scatter
+### 🔹 Real vs Predicted Scatter
 ![scatter_plot](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/scatter_plot.png)
 
 🛠️ 4. Cấu trúc code chính
