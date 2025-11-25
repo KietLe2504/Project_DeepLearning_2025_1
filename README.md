@@ -55,12 +55,19 @@ MAPE: 3.14%
 
 🖼️ 3. Kết quả trực quan (Visualization)
 🔹 Real vs Predicted
+https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/real_vs_pred.png
 
 🔹 Error Plot
+https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/error_plot.png
+
 
 🔹 Loss Curve
+https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/loss_curve.png
+
 
 🔹 Real vs Predicted Scatter
+https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/scatter_plot.png
+
 
 🛠️ 4. Cấu trúc code chính
 Pipeline chính gồm:
@@ -80,23 +87,4 @@ Build & train mô hình
 Dự đoán & đánh giá
 
 Vẽ biểu đồ
-
-📌 5. Cách chạy project
-pip install -r requirements.txt
-python main.py
-
-
-File dữ liệu sử dụng:
-
-compiled_dataset.csv
-
-📁 6. Cấu trúc thư mục
-LongLSTM/
-│── images/
-│   ├── real_vs_pred.png
-│   ├── error_plot.png
-│   ├── loss_curve.png
-│   ├── scatter_plot.png
-│── main.py
-│── requirements.txt
 
