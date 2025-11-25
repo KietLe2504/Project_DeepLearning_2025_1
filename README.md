@@ -55,19 +55,16 @@ MAPE: 3.14%
 
 🖼️ 3. Kết quả trực quan (Visualization)
 🔹 Real vs Predicted
-https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/real_vs_pred.png
+![real_vs_pred](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/real_vs_pred.png)
 
 🔹 Error Plot
-https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/error_plot.png
-
+![error_plot](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/error_plot.png)
 
 🔹 Loss Curve
-https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/loss_curve.png
-
+![loss_curve](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/loss_curve.png)
 
 🔹 Real vs Predicted Scatter
-https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/scatter_plot.png
-
+![scatter_plot](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/main/LongLSTM/images/scatter_plot.png)
 
 🛠️ 4. Cấu trúc code chính
 Pipeline chính gồm:
