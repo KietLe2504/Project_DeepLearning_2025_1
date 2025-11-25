@@ -1,57 +1,76 @@
-📈 LSTM Baseline Model for Crude Oil Price Prediction
+**📈 LSTM Baseline Model for Crude Oil Price Prediction**
 
-Dự án xây dựng mô hình LSTM 3 tầng để dự đoán giá dầu thô Cushing (WTI) dựa trên dữ liệu thời gian và các chỉ báo kỹ thuật nâng cao.
+Dự án xây dựng mô hình LSTM ba tầng nhằm dự đoán giá dầu thô Cushing (WTI) dựa trên dữ liệu chuỗi thời gian kết hợp các chỉ báo kỹ thuật nâng cao.
 
-🚀 1. Mô tả tổng quan
+**🚀 1. Tổng quan mô hình**
 
-Mô hình được phát triển với mục tiêu dự đoán giá ngày tiếp theo dựa trên 50 ngày dữ liệu quá khứ.
+Mục tiêu của mô hình là dự đoán giá dầu của ngày tiếp theo dựa trên 50 phiên giao dịch gần nhất.
+Pipeline gồm các bước chính:
 
-🔧 Kỹ thuật sử dụng
+Tiền xử lý & chuẩn hóa dữ liệu
 
-Feature engineering nâng cao:
+Feature engineering nâng cao
 
-Lag features (1, 3, 7, 14 ngày)
+Tạo chuỗi thời gian dạng window
 
-MA7, MA14, MA30
+Huấn luyện mô hình LSTM 3 tầng
 
-Volatility (7d, 14d)
+Đánh giá & trực quan hóa kết quả
 
-ROC, momentum (7d, 14d)
+🔧 2. Các kỹ thuật và thành phần chính
+🔹 Feature Engineering
 
-Bollinger Bands (upper, lower, position)
+Áp dụng loạt chỉ báo kỹ thuật nhằm mô tả đầy đủ biến động giá:
+
+Lag features: 1, 3, 7, 14 ngày
+
+Moving Averages: MA7, MA14, MA30
+
+Volatility 7d & 14d
+
+Momentum: 7d & 14d
+
+Rate of Change (ROC)
+
+Bollinger Bands (upper / lower / position)
 
 RSI 14 ngày
 
-Price range
+Price range 7 ngày
 
-Chuẩn hóa: MinMaxScaler
+🔹 Tiền xử lý & Chuẩn hóa
 
-Windowed input: WINDOW_SIZE = 50
+MinMaxScaler cho toàn bộ input features
 
-Kiến trúc:
+Window input: WINDOW_SIZE = 50
 
-LSTM(128, return_seq)
+🔹 Kiến trúc mô hình
 
-LSTM(64, return_seq)
+LSTM(128, return_sequences=True)
+
+LSTM(64, return_sequences=True)
 
 LSTM(32)
 
-Dropout 0.2
+Dropout 0.2 mỗi tầng
 
-Dense(1)
+Dense(1) cho output
 
-Loss: Huber loss
+Loss function: Huber Loss
 
-Callbacks:
+Optimizer: Adam
 
-EarlyStopping
+🔹 Callbacks
 
-ReduceLROnPlateau
+EarlyStopping (restore_best_weights)
 
-📊 2. Kết quả đánh giá
+ReduceLROnPlateau (giảm LR khi mô hình chững)
+
+**📊 2. Kết quả đánh giá**
 RMSE: 0.1529
 MAE : 0.1378
 MAPE: 3.14%
+
 ## 📊 3. Kết quả trực quan (Visualization)
 
 ### 🔹 Real vs Predicted
@@ -66,22 +85,82 @@ MAPE: 3.14%
 ### 🔹 Real vs Predicted Scatter
 ![scatter_plot](https://raw.githubusercontent.com/KietLe2504/Project_DeepLearning_2025_1/LongLSTM/images/scatter_plot.png)
 
-🛠️ 4. Cấu trúc code chính
-Pipeline chính gồm:
+**🛠️ 4. Pineline**
 
-Load & xử lý dữ liệu
+Toàn bộ chương trình được tổ chức theo một pipeline xử lý dữ liệu và huấn luyện mô hình gồm 8 bước, tuần tự như sau:
 
-Feature engineering
+1️⃣ Load & xử lý dữ liệu
 
-Train/Test split
+Đọc file dữ liệu gốc (compiled_dataset.csv)
 
-Scaling
+Chuyển đổi kiểu dữ liệu ngày tháng
 
-Tạo sequences cho LSTM
+Sắp xếp theo thời gian và xử lý các giá trị thiếu (nếu có)
 
-Build & train mô hình
+2️⃣ Feature Engineering
 
-Dự đoán & đánh giá
+Tạo thêm các đặc trưng kỹ thuật (technical indicators) để mô tả hành vi giá, bao gồm:
 
-Vẽ biểu đồ
+Lag features
 
+Moving Averages
+
+Volatility
+
+Momentum, ROC
+
+Bollinger Bands
+
+RSI
+
+Price range
+→ Sau đó loại bỏ toàn bộ các dòng sinh ra NaN.
+
+3️⃣ Train/Test Split
+
+Chia dữ liệu theo tỷ lệ 80% train – 20% test
+
+Đảm bảo thứ tự thời gian được giữ nguyên (không shuffle)
+
+4️⃣ Scaling
+
+Chuẩn hóa toàn bộ features bằng MinMaxScaler
+
+Chuẩn hóa riêng cột target
+
+Lưu lại scaler để đảo ngược (inverse transform) khi đánh giá
+
+5️⃣ Tạo sequences cho LSTM
+
+Chuyển dữ liệu chuỗi thời gian thành dạng 3D:
+(num_samples, window_size, num_features)
+
+Với WINDOW_SIZE = 50, mô hình dùng 50 ngày trước để dự đoán ngày tiếp theo
+
+6️⃣ Build & train mô hình LSTM
+
+Xây dựng mô hình 3 tầng LSTM + Dropout
+
+Compile với Adam + Huber Loss
+
+Huấn luyện cùng EarlyStopping & ReduceLROnPlateau để tránh overfitting
+
+7️⃣ Dự đoán & đánh giá
+
+Dự đoán trên tập test
+
+Inverse transform để đưa giá về dạng thật
+
+Tính các chỉ số: RMSE, MAE, MAPE
+
+8️⃣ Vẽ biểu đồ
+
+Trực quan hóa kết quả gồm:
+
+Biểu đồ Real vs Predicted
+
+Biểu đồ sai số (Prediction Error)
+
+Training loss / val_loss
+
+Scatter plot so sánh dự đoán và giá thật
